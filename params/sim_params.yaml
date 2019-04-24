@@ -1,0 +1,243 @@
+# tmax: 60.0 # Simulation total time, time step is determined by IMU rate
+# tmax: 300.0 # Simulation total time, time step is determined by IMU rate
+tmax: 60.0 # Simulation total time, time step is determined by IMU rate
+log_filename: "" # Not used but prevents error message in multirotor_sim
+log_directory: "~" #"../logs/NONIDEAL"
+
+random_seed: -1 # -1 initializes seed with time
+
+# Path type:
+#   0 : waypoints
+#   1 : random waypoints
+#   2 : circular trajectory
+#   3 : constant velocity, randomly varying heading
+path_type: 0
+
+# User-defined waypoints
+waypoints: [
+             8,  0, -7, 0,
+            -8,  0, -7, 0,
+             8,  0, -7, 0,
+            -8,  0, -7, 0,
+             0, -8, -5, 0,
+             0,  8, -5, 0,
+             0, -8, -5, 0,
+             0,  8, -5, 0,
+            ]
+
+# Landmarks for Calibration
+landmarks: [
+	     0.0,  0.0, 0.0,
+	    -0.2,  0.2, 0.0,
+             0.2,  0.2, 0.0,
+             0.2, -0.2, 0.0,
+            -0.2, -0.2, 0.0,
+           ]
+
+# Random waypoints parameters
+num_random_waypoints: 30
+altitude: -5.0
+altitude_variance: 1.0
+heading_walk: 0.5
+waypoint_separation: 1.0
+waypoint_sep_variance: 2.0 # uniformly random number between zero and this to add to separation
+
+# Constant velocity trajectory parameters
+velocity_magnitude: 1.0
+traj_altitude: -5.0
+traj_heading_walk: 10.0
+traj_heading_straight_gain: 0.01
+
+# Follow the carrot trajectory parameters
+traj_delta_north: 10
+traj_delta_east: 10
+traj_delta_alt: -4
+traj_delta_yaw: 1.5
+traj_nom_north: 0
+traj_nom_east: 0
+traj_nom_alt: 4
+traj_nom_yaw: 0
+traj_north_period: 20
+traj_east_period: 20
+traj_alt_period: 20
+traj_yaw_period: 20
+
+
+# Controller Configuration
+throttle_eq: 0.5
+mass: 1.0
+max_thrust: 19.6133
+waypoint_threshold: 0.1
+waypoint_velocity_threshold: 0.5
+drag_constant: 0.1
+angular_drag_constant: 0.01
+
+Kp: [1, 1, 1]
+Kd: [0, 0, 0]
+Kv: [2, 2, 2]
+sh_kv: 100 # Hover throttle velocity gain
+sh_ks: 0.01 # Hover throttle gain
+
+roll_kp: 10.0
+roll_ki: 0.0
+roll_kd: 1.0
+pitch_kp: 10.0
+pitch_ki: 0.0
+pitch_kd: 1.0
+yaw_rate_kp: 1.0
+yaw_rate_ki: 0.0
+yaw_rate_kd: 0.0
+max_roll: 0.78
+max_pitch: 0.78
+max_yaw_rate: 1.57
+max_throttle: 1.0
+max_vel: 5.0
+max_tau_x: 1.0
+max_tau_y: 1.0
+max_tau_z: 1.0
+
+inertia: [0.1, 0.1, 0.1]
+
+x0: [0, 0, -5,   # POS
+     1, 0, 0,    # VEL
+     1, 0, 0, 0, # ATT
+     0, 0, 0]    # OMEGA
+
+ekf_x0: [0, 0, -5,    # POS
+         1, 0, 0,    # VEL
+         1, 0, 0, 0, # ATT 
+         0, 0, 0,    # OMEGA 
+         0, 0, 0]    # ACC
+
+
+# Environment Setup
+wall_max_offset: 0.01 # Points are distributed normally about the wall
+feat_move_prob: 0.00
+points_move_stdev: 0.05
+
+
+# Wind Setup
+enable_wind: false # Turn wind on and off
+wind_init_stdev: 0.1 # Variation on the initial wind direction components
+wind_walk_stdev: 0.1 # Amount of random walk in wind components
+
+
+# Truth Configuration ++++
+use_accel_truth: false #true
+use_gyro_truth: false #true
+use_camera_truth: false #true
+use_altimeter_truth: false #true
+use_depth_truth: false #true
+use_vo_truth: false #true
+
+RK4: true
+
+
+# Sensor Configuration
+
+## Active Measurements
+init_depth: false
+feature_update_active: true
+drag_update_active: true
+attitude_update_active: true
+position_update_active: true
+depth_update_active: true
+altimeter_update_active: false
+vo_update_active: false
+
+## IMU ++++
+imu_update_rate: 250
+accel_init_stdev: 0.2 #0.3 #0.0
+accel_noise_stdev: 0.5 #0.3 #1.0 #0.0
+accel_bias_walk: 0.05 #0.01 #0.00
+gyro_init_stdev: 0.1 #0.1 #0.0
+gyro_noise_stdev: 0.1 #0.1 #0.0
+gyro_bias_walk: 0.01 #0.001 #0.00
+q_b_u: [1.0, 0.0, 0.0, 0.0]
+# q_b_u: [0.983347443256356, 0.0342707985504821, 0.106020511061796, 0.143572175027392]
+# q_b_u: [0.988771077936042, 0.0, 0.0, 0.149438132473599]
+# q_b_u: [0.993760669165504, 0.0497294816014604, 0.0997086508721388, 0.00498959122946198]
+p_b_u: [0.0, 0.0, 0.0]
+
+## Camera ++++
+camera_time_delay: 0.0
+camera_update_rate: 30
+pixel_noise_stdev: 0.0 #2.0 #2.0 #0.2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+focal_len: [250.0, 250.0]
+cam_center: [320, 240]
+image_size: [640, 480]
+# ++++
+# p_b_c: [0, 0, 0] # zero offsets
+# p_b_c: [0.05, -0.04, 0.075] # non-zero offsets
+p_b_c: [0.0, 0.0, 0.1]
+# 
+# q_b_c: [0.707107, 0.000000, 0.000000, 0.707107] # zero offsets
+# q_b_c: [0.700479, 0.024677, 0.000215, 0.713247] # non-zero offsets
+q_b_c: [0.676059, -0.005356, 0.122671, 0.726545]
+# ++++
+#p_b_c: [0.0, 0.0, 0.0 ]
+loop_closure: true
+
+## Altimeter
+altimeter_update_rate: 25
+altimeter_noise_stdev: 0.1
+
+## Depth ++++
+depth_update_rate: 30
+depth_noise_stdev: 0.01 #0.0
+
+## Visual Odometry
+vo_delta_position: 0.2 # meters
+vo_delta_attitude: 0.53 # radians
+vo_translation_noise_stdev: 0.01
+vo_rotation_noise_stdev: 0.001
+
+## Truth ++++
+# p_b_m: [0.04, 0.03, 0.02] # position of mocap wrt body frame (expressed in body frame)
+p_b_m: [0.0, 0.0, 0.0] # position of mocap wrt body frame (expressed in body frame)
+q_b_m: [1.0, 0.0, 0.0, 0.0] # rotation from body frame to mocap frame
+# q_b_m: [0.9747941070689433, 0.0, 0.22310636213174545, 0.0] # rotation from body frame to mocap frame
+truth_update_rate: 50
+use_attitude_truth: false #true <<<<<<<
+use_position_truth: false #true <<<<<<<
+attitude_noise_stdev: 0.75
+position_noise_stdev: 1.0
+truth_delay: 0
+truth_time_offset: 0
+truth_transmission_noise: 0.0
+truth_transmission_time: 0.0
+
+# Common estimator configuration
+mu0: 0.1
+
+P0: [0.000001, 0.000001, 0.000001, # We start exactly at truth
+     0.000001, 0.000001, 0.000001,
+     0.000001, 0.000001, 0.000001,
+     0.0, 0.0, 0.0, # Bias init noise is overwritten by common file
+     0.0, 0.0, 0.0, # Bias init noise is overwritten by common file
+     0.000001]
+P0_feat: [0.1, 0.1, 0.3]
+
+Qx: [0.0, 0.0, 0.0,
+     0.0, 0.0, 0.0,
+     0.0, 0.0, 0.0,
+     0.0, 0.0, 0.0, # Bias noise overwritten by common file
+     0.0, 0.0, 0.0, # Bias noise overwritten by common file
+     0.0]
+Qx_feat: [0.0, 0.0, 0.0]
+
+lambda: [1.0, 1.0, 1.0,     # POS
+         1.0, 1.0, 1.0,     # VEL
+         1.0, 1.0, 1.0,     # ATT
+         1.0, 1.0, 1.0,     # B_A
+         1.0, 1.0, 1.0,     # B_G
+         1.0]               # MU
+lambda_feat: [1.0, 1.0, 1.0]
+
+imu_LPF: 0.0
+truth_LPF: 0.0
+
+min_depth: 3.0
+keyframe_overlap: 0.8
+feature_radius: 45
+cov_prop_skips: 0 # number of covariance propagation opportunities to skip

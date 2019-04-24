@@ -1,0 +1,9 @@
+## Initial guess of extrinsic parameters
+p_b2c: [0, 0, 0]                                  # Body to Camera translation
+q_b2c: [0.707107, 0.000000, 0.000000, 0.707107]   # Body to Camera rotation
+
+## Camera Parameters
+focal_len: [250.0, 250.0]
+cam_center: [320, 240]
+image_size: [640, 480]
+

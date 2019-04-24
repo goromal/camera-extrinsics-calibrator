@@ -1,0 +1,13 @@
+prefix: "BL"
+
+use_drag_term: false
+partial_update: false
+keyframe_reset: false
+
+Qx: [0.0, 0.0, 0.0,
+     0.0, 0.0, 0.0,
+     0.0, 0.0, 0.0,
+     0.0, 0.0, 0.0, # Bias noise overwritten by common file
+     0.0, 0.0, 0.0, # Bias noise overwritten by common file
+     0.0]
+Qx_feat: [0.0, 0.0, 0.0]
