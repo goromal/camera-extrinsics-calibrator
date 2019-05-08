@@ -1,4 +1,0 @@
-- process matlab folder
-- possibly make data matlab script reference the utils folder in matlab folder, removing the utils folder in the data folder
-- write the README with the pdf explanation doc
-- DELETE THIS FILE

@@ -13,7 +13,7 @@ random_seed: -1 # -1 initializes seed with time
 #   3 : constant velocity, randomly varying heading
 path_type: 0
 
-# User-defined waypoints
+# User-defined waypoints (N (m), E (m), D (m), psi (rad))
 waypoints: [
              8,  0, -7, 0,
             -8,  0, -7, 0,

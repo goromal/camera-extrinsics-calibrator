@@ -188,11 +188,14 @@ public:
     Map<const Vec2> focal_len_;
     Map<const Vec2> cam_center_;
     Map<const Vec5> distortion_;
+    // const T k1_;// = distortion_(0);
+    // const T k2_;// = distortion_(1);
+    // const T p1_;// = distortion_(2);
+    // const T p2_;// = distortion_(3);
+    // const T k3_;// = distortion_(4);
     const T& s_;
     Vector2d image_size_;
 
 private:
     const Matrix2d I_2x2 = Matrix2d::Identity();
 };
-
-
